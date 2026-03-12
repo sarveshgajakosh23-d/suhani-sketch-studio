@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suhani Sketch Studio — Handcrafted Portrait Sketches</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#F9F6F1;--bg2:#F2EDE6;--white:#fff;
+  --charcoal:#1C1C1C;--mid:#6B6B6B;--light:#ABABAB;
+  --gold:#C9A84C;--gold2:#E4C87A;--gold-light:#F5E6C2;
+  --border:rgba(201,168,76,0.3);
+  --sh:0 4px 24px rgba(0,0,0,0.07);
+  --sh2:0 12px 48px rgba(0,0,0,0.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--charcoal);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:50px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s ease}
+.btn-dark{background:var(--charcoal);color:#fff}.btn-dark:hover{background:#2a2a2a;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.22)}
+.btn-out{background:transparent;color:var(--charcoal);border:2px solid var(--charcoal)}.btn-out:hover{background:var(--charcoal);color:#fff;transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:var(--charcoal)}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4)}
+.slabel{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.slabel::before{content:'';width:26px;height:1.5px;background:var(--gold);flex-shrink:0}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);line-height:1.15;margin-bottom:14px}
+.sdesc{color:var(--mid);font-size:0.97rem;line-height:1.75;max-width:520px;margin-bottom:48px}
+section{padding:90px 5%}
+.gold{color:var(--gold)}.it{font-style:italic}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s}
+#nav.solid{background:rgba(249,246,241,0.96);backdrop-filter:blur(14px);box-shadow:0 1px 18px rgba(0,0,0,0.06);padding:12px 5%}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal);position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width 0.3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--charcoal);color:#fff!important;padding:9px 22px;border-radius:50px;font-size:0.76rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.3s}
+.nav-cta:hover{background:var(--gold);color:var(--charcoal)!important}.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);border-radius:2px;transition:all 0.3s}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:199;padding:96px 5% 40px;flex-direction:column}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:1.4rem;padding:16px 0;border-bottom:1px solid var(--bg2);color:var(--charcoal)}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px;padding:120px 5% 80px;position:relative;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 72% 40%,rgba(201,168,76,0.08),transparent 60%);pointer-events:none}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid var(--border);padding:6px 16px;border-radius:50px;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.hero-pill .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5.2rem);line-height:1.06;margin-bottom:14px}
+.hero-h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:1rem;color:var(--mid);font-weight:300;line-height:1.65;margin-bottom:10px}
+.hero-quote{font-family:'Dancing Script',cursive;font-size:1.4rem;color:var(--gold);margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:32px;margin-top:44px;padding-top:32px;border-top:1px solid var(--bg2)}
+.hstat strong{font-family:'Playfair Display',serif;font-size:1.8rem;display:block;line-height:1}
+.hstat span{font-size:0.76rem;color:var(--mid);margin-top:3px;display:block}
+.hero-right{position:relative}
+.hero-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hcard{background:var(--white);border-radius:18px;overflow:hidden;box-shadow:var(--sh2);transition:transform 0.4s}
+.hcard:hover{transform:translateY(-5px)}
+.hcard:nth-child(1){grid-column:span 2}
+.hcard-img{overflow:hidden;background:var(--bg2)}
+.hcard:nth-child(1) .hcard-img{height:240px}
+.hcard:nth-child(2) .hcard-img,.hcard:nth-child(3) .hcard-img{height:140px}
+.hcard-img img{transition:transform 0.5s ease}
+.hcard:hover .hcard-img img{transform:scale(1.06)}
+.hcard-info{padding:12px 16px;border-top:1px solid var(--bg2)}
+.hcard-info strong{font-size:0.82rem;font-weight:700;display:block}
+.hcard-info span{font-size:0.7rem;color:var(--gold);font-weight:600}
+.scroll-hint{position:absolute;bottom:30px;left:5%;display:flex;align-items:center;gap:10px}
+.scroll-line{width:34px;height:1.5px;background:var(--charcoal);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);animation:sl 2s ease infinite}
+@keyframes sl{to{transform:translateX(100%)}}
+.scroll-hint span{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--mid)}
+
+/* ABOUT */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:400px 1fr;gap:72px;align-items:center}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:3/4;border-radius:22px;overflow:hidden;position:relative;background:var(--bg2)}
+.about-img::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);z-index:1;pointer-events:none}
+.about-frame{position:absolute;top:-14px;left:-14px;right:14px;bottom:14px;border:2px solid var(--border);border-radius:26px;pointer-events:none}
+.about-badge{position:absolute;bottom:-18px;right:-18px;background:var(--charcoal);color:#fff;padding:16px 20px;border-radius:14px;box-shadow:var(--sh2);text-align:center;z-index:2}
+.about-badge strong{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);display:block}
+.about-badge span{font-size:0.66rem;color:rgba(255,255,255,0.55);letter-spacing:0.1em;text-transform:uppercase}
+.about-content p{color:var(--mid);line-height:1.8;margin-bottom:16px;font-size:0.96rem}
+.signature{font-family:'Dancing Script',cursive;font-size:2.1rem;color:var(--gold);margin:24px 0 28px}
+.about-stats{display:flex;gap:28px;padding-top:24px;border-top:1px solid var(--bg2)}
+.astat strong{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--charcoal);display:block}
+.astat span{font-size:0.76rem;color:var(--mid)}
+
+/* GALLERY */
+#gallery{background:var(--bg)}
+.gtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.gtab{padding:7px 18px;border-radius:50px;font-size:0.74rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border:1.5px solid var(--border);background:transparent;color:var(--mid);cursor:pointer;transition:all 0.3s}
+.gtab.on,.gtab:hover{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.gtab-celeb{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(201,168,76,0.06)}
+.gtab-celeb:hover{background:linear-gradient(135deg,var(--gold),var(--gold2))!important;color:var(--charcoal)!important;border-color:transparent!important}
+.ggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gitem{border-radius:14px;overflow:hidden;background:var(--white);box-shadow:var(--sh);cursor:pointer;transition:transform 0.35s,box-shadow 0.35s;position:relative}
+.gitem:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
+.gimg{overflow:hidden;height:230px;background:var(--bg2)}
+.gimg img{transition:transform 0.5s ease}
+.gitem:hover .gimg img{transform:scale(1.08)}
+.ginfo{padding:14px 16px}
+.gcat{font-size:0.66rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px}
+.gname{font-size:0.9rem;font-weight:600}
+.gover{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,28,0.85) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:16px}
+.gitem:hover .gover{opacity:1}
+.gover-txt{color:#fff}.gover-txt small{font-size:0.65rem;color:var(--gold2);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.gover-txt strong{font-size:0.87rem}
+
+/* CELEBRITY MODAL */
+#celebModal{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+#celebModal.show{display:flex;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.celeb-box{background:linear-gradient(145deg,#1a1a1a,var(--charcoal));border-radius:30px;overflow:hidden;max-width:520px;width:100%;position:relative;text-align:center;padding:60px 44px 44px;border:1px solid rgba(201,168,76,0.25);box-shadow:0 32px 80px rgba(0,0,0,0.5)}
+.celeb-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:200px;background:radial-gradient(ellipse,rgba(201,168,76,0.15),transparent 70%);pointer-events:none}
+.celeb-stars{color:var(--gold);font-size:1.2rem;letter-spacing:6px;margin-bottom:24px}
+.celeb-icon{font-size:3.6rem;margin-bottom:18px;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.celeb-msg{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:#fff;line-height:1.2;margin-bottom:12px}
+.celeb-msg em{color:var(--gold);font-style:italic;display:block}
+.celeb-tagline{font-family:'Dancing Script',cursive;font-size:1.25rem;color:var(--gold2);margin-bottom:28px;line-height:1.5}
+.celeb-quote{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.18);border-radius:14px;padding:18px 22px;margin-bottom:30px}
+.celeb-quote p{color:rgba(255,255,255,0.72);font-size:0.88rem;line-height:1.75;font-style:italic}
+.celeb-x{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:36px;height:36px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.celeb-x:hover{background:var(--gold);color:var(--charcoal);border-color:var(--gold)}
+
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#lb.show{display:flex}
+.lb-box{background:var(--white);border-radius:18px;overflow:hidden;max-width:520px;width:100%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.5)}
+.lb-img{height:340px;overflow:hidden;background:var(--bg2)}
+.lb-body{padding:22px 26px}
+.lb-body h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:8px}
+.lb-body p{color:var(--mid);font-size:0.86rem;line-height:1.65;margin-bottom:18px}
+.lb-x{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.45);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.lb-x:hover{background:var(--gold);color:var(--charcoal)}
+
+/* PROCESS */
+#process{background:var(--white)}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.pgrid::before{content:'';position:absolute;top:42px;left:12%;right:12%;height:2px;background:linear-gradient(to right,var(--gold),var(--gold-light),var(--gold));z-index:0}
+.pstep{text-align:center;position:relative;z-index:1;padding:0 10px}
+.picon{width:86px;height:86px;border-radius:50%;background:var(--bg);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;transition:all 0.4s;position:relative;font-size:1.7rem}
+.pnum{position:absolute;top:-4px;right:-4px;width:24px;height:24px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:800;color:var(--charcoal)}
+.pstep:hover .picon{background:var(--gold-light);border-color:var(--gold);transform:scale(1.07)}
+.pstep h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:9px}
+.pstep p{font-size:0.81rem;color:var(--mid);line-height:1.6}
+
+/* PHOTO TO SKETCH */
+#sketch-tool{background:var(--bg2);padding:90px 5%}
+.sketch-wrap{max-width:860px;margin:0 auto}
+.sketch-stage{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.sketch-panel{border-radius:18px;overflow:hidden;background:var(--white);box-shadow:var(--sh2)}
+.sketch-panel-hd{padding:13px 18px;border-bottom:1px solid var(--bg2);display:flex;align-items:center;justify-content:space-between;background:var(--bg)}
+.sketch-panel-hd .phd-title{font-size:0.74rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid)}
+.badge-before{background:var(--bg2);color:var(--mid);padding:3px 11px;border-radius:50px;font-size:0.64rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase}
+.badge-after{background:var(--gold-light);color:var(--gold);padding:3px 11px;border-radius:50px;font-size:0.64rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase}
+.sketch-canvas-wrap{height:280px;overflow:hidden;background:#eee;position:relative}
+canvas{display:block;width:100%;height:100%;object-fit:contain}
+.sketch-controls{background:var(--white);border-radius:16px;padding:22px 28px;box-shadow:var(--sh);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.sketch-upload-btn{display:inline-flex;align-items:center;gap:7px;background:var(--charcoal);color:#fff;padding:11px 22px;border-radius:50px;font-size:0.78rem;font-weight:600;cursor:pointer;border:none;transition:all 0.3s;letter-spacing:0.06em}
+.sketch-upload-btn:hover{background:var(--gold);color:var(--charcoal)}
+.sketch-convert-btn{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--charcoal);padding:11px 22px;border-radius:50px;font-size:0.78rem;font-weight:600;cursor:pointer;border:none;transition:all 0.3s;letter-spacing:0.06em}
+.sketch-convert-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.4)}
+.sketch-download-btn{display:none;align-items:center;gap:7px;background:transparent;color:var(--charcoal);padding:11px 22px;border-radius:50px;font-size:0.78rem;font-weight:600;cursor:pointer;border:2px solid var(--border);transition:all 0.3s;letter-spacing:0.06em}
+.sketch-download-btn:hover{border-color:var(--charcoal);background:var(--charcoal);color:#fff}
+.sketch-tip{font-size:0.78rem;color:var(--mid);margin-left:auto;font-style:italic}
+
+/* ORDER */
+#order{background:var(--white)}
+.owrap{max-width:720px;margin:0 auto}
+.prog-wrap{display:flex;margin-bottom:44px;position:relative}
+.prog-track{position:absolute;top:18px;left:0;right:0;height:2px;background:var(--bg2);z-index:0}
+.prog-fill{position:absolute;top:18px;left:0;height:2px;background:var(--gold);transition:width 0.5s;z-index:1}
+.pdot-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;z-index:2;position:relative}
+.pdot{width:36px;height:36px;border-radius:50%;background:var(--bg2);border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:0.76rem;font-weight:700;color:var(--mid);transition:all 0.4s}
+.pdot-wrap.act .pdot{background:var(--gold);border-color:var(--gold);color:var(--charcoal);transform:scale(1.1)}
+.pdot-wrap.done .pdot{background:var(--charcoal);color:#fff}
+.pdot-lbl{font-size:0.66rem;color:var(--mid);text-align:center}.pdot-wrap.act .pdot-lbl{color:var(--gold);font-weight:700}
+.fstep{display:none}.fstep.act{display:block;animation:fadeUp 0.35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fcard{background:var(--bg);border-radius:16px;padding:32px;margin-bottom:18px}
+.fcard h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:7px}
+.fcard>p{color:var(--mid);font-size:0.86rem;margin-bottom:26px}
+.ubox{border:2px dashed var(--border);border-radius:12px;padding:48px 28px;text-align:center;cursor:pointer;transition:all 0.3s;background:var(--white)}
+.ubox:hover{border-color:var(--gold);background:var(--gold-light)}
+.ubox .uicon{font-size:2.6rem;margin-bottom:10px}
+.ubox h4{font-size:0.92rem;font-weight:700;margin-bottom:5px}
+.ubox p{font-size:0.78rem;color:var(--mid)}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stype{border:2px solid var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s;background:var(--white)}
+.stype:hover,.stype.sel{border-color:var(--gold);background:var(--gold-light)}
+.stype .ticon{font-size:1.9rem;margin-bottom:8px}
+.stype h4{font-size:0.86rem;font-weight:700;margin-bottom:2px}
+.stype .tsub{font-size:0.73rem;color:var(--mid);margin-bottom:7px}
+.stype .tprice{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold);font-weight:700}
+.szrow{display:flex;gap:12px}
+.ssize{flex:1;border:2px solid var(--border);border-radius:11px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.3s;background:var(--white)}
+.ssize:hover,.ssize.sel{border-color:var(--gold);background:var(--gold-light)}
+.ssize .szico{font-size:1.5rem;margin-bottom:7px}
+.ssize h4{font-size:0.85rem;font-weight:700}
+.ssize span{font-size:0.72rem;color:var(--mid);display:block;margin-top:2px}
+.ssize .szp{font-size:0.75rem;color:var(--gold);font-weight:700;margin-top:5px}
+.fgroup{margin-bottom:18px}
+.fgroup label{display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--charcoal);margin-bottom:6px}
+.fgroup input,.fgroup textarea{width:100%;padding:12px 15px;border:1.5px solid var(--border);border-radius:9px;font-family:'Inter',sans-serif;font-size:0.88rem;background:var(--white);color:var(--charcoal);outline:none;transition:border-color 0.3s}
+.fgroup input:focus,.fgroup textarea:focus{border-color:var(--gold)}
+.fgroup textarea{resize:vertical;min-height:100px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pbar{background:var(--charcoal);border-radius:12px;padding:20px 26px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}
+.pbar .pbl{font-size:0.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px}
+.pbar .pbd{font-size:0.78rem;color:rgba(255,255,255,0.38)}
+.pbar .pba{font-family:'Playfair Display',serif;font-size:2.1rem;color:var(--gold)}
+.fnav{display:flex;justify-content:space-between;align-items:center}
+
+/* PRICING */
+#pricing{background:var(--bg2)}
+.pgrid2{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pc{background:var(--white);border-radius:20px;padding:28px 24px;border:1.5px solid transparent;transition:all 0.4s;position:relative;overflow:hidden}
+.pc::after{content:'';position:absolute;inset:0;border-radius:20px;border:1.5px solid var(--border);pointer-events:none}
+.pc:hover,.pc.feat{transform:translateY(-7px);box-shadow:var(--sh2)}
+.pc.feat{background:var(--charcoal)}.pc.feat::after{border-color:var(--gold)}
+.pc-ico{font-size:1.9rem;margin-bottom:18px;width:50px;height:50px;background:var(--bg2);border-radius:13px;display:flex;align-items:center;justify-content:center}
+.pc.feat .pc-ico{background:rgba(255,255,255,0.1)}
+.pc h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:4px}
+.pc.feat h3{color:#fff}
+.pc-sub{font-size:0.78rem;color:var(--mid);margin-bottom:0}
+.pc.feat .pc-sub{color:rgba(255,255,255,0.45)}
+.pc-prices{margin:12px 0 18px}
+.pc-prow{display:flex;align-items:baseline;gap:7px;margin-bottom:7px}
+.pc-stag{font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);width:26px;flex-shrink:0}
+.pc.feat .pc-stag{color:rgba(255,255,255,0.4)}
+.pc-amt{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);line-height:1}
+.pc-amt span{font-size:0.86rem}
+.pc-feats{list-style:none;margin-bottom:24px}
+.pc-feats li{font-size:0.8rem;color:var(--mid);padding:6px 0;border-bottom:1px solid var(--bg2);display:flex;align-items:center;gap:7px}
+.pc.feat .pc-feats li{color:rgba(255,255,255,0.6);border-bottom-color:rgba(255,255,255,0.07)}
+.pc-feats li::before{content:'✓';color:var(--gold);font-weight:800;flex-shrink:0}
+.fbadge{position:absolute;top:16px;right:16px;background:var(--gold);color:var(--charcoal);font-size:0.6rem;font-weight:800;padding:3px 10px;border-radius:50px;letter-spacing:0.1em;text-transform:uppercase}
+
+/* REVIEWS */
+#reviews{background:var(--white)}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rcard{background:var(--bg);border-radius:16px;padding:26px 22px;transition:all 0.3s;position:relative}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(201,168,76,0.14)}
+.rstars{color:var(--gold);font-size:0.92rem;letter-spacing:2px;margin-bottom:12px}
+.rtext{font-size:0.88rem;color:var(--charcoal);line-height:1.7;font-style:italic;margin-bottom:18px}
+.rauthor{display:flex;align-items:center;gap:11px}
+.rav{width:40px;height:40px;border-radius:50%;background:var(--gold-light);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--gold);flex-shrink:0}
+.rname{font-weight:700;font-size:0.86rem}
+.rloc{font-size:0.73rem;color:var(--mid)}
+.rquote{position:absolute;top:16px;right:18px;font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold-light);line-height:1}
+
+/* INSTAGRAM */
+#insta{background:var(--bg);padding:76px 5%;text-align:center}
+.igrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;border-radius:20px;overflow:hidden;margin:36px 0;box-shadow:var(--sh2)}
+.igitem{aspect-ratio:1;background:var(--bg2);overflow:hidden;cursor:pointer;position:relative}
+.igitem img{transition:transform 0.45s ease}
+.igitem:hover img{transform:scale(1.1)}
+.igov{position:absolute;inset:0;background:rgba(201,168,76,0.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:0.3s;font-size:1.4rem}
+.igitem:hover .igov{opacity:1}
+.insta-btn{display:inline-flex;align-items:center;gap:9px;background:var(--charcoal);color:#fff;padding:14px 32px;border-radius:50px;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.3s}
+.insta-btn:hover{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);transform:translateY(-2px);box-shadow:0 10px 30px rgba(253,29,29,0.28)}
+
+/* CONTACT */
+#contact{background:var(--charcoal);padding:90px 5%}
+.cgrid2{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.ci .slabel{color:var(--gold2)}
+.ci .stitle{color:#fff}
+.ci>p{color:rgba(255,255,255,0.52);line-height:1.8;margin-bottom:32px}
+.cdet{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+.cdet-ico{width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.cdet p{font-size:0.7rem;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px}
+.cdet strong{color:#fff;font-size:0.9rem}
+.socials{display:flex;gap:9px;margin-top:28px}
+.soc{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:all 0.3s}
+.soc:hover{background:var(--gold);border-color:var(--gold)}
+.cf .fgroup label{color:rgba(255,255,255,0.62)}
+.cf .fgroup input,.cf .fgroup textarea{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.12);color:#fff}
+.cf .fgroup input::placeholder,.cf .fgroup textarea::placeholder{color:rgba(255,255,255,0.28)}
+.cf .fgroup input:focus,.cf .fgroup textarea:focus{border-color:var(--gold)}
+
+/* FOOTER */
+footer{background:#111;padding:32px 5%}
+.ftin{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.flogo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.1rem}
+.fcopy{font-size:0.76rem;color:rgba(255,255,255,0.22)}
+.flinks{display:flex;gap:18px}
+.flinks a{font-size:0.76rem;color:rgba(255,255,255,0.32);transition:color 0.3s}
+.flinks a:hover{color:var(--gold)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--charcoal);color:#fff;padding:14px 22px;border-radius:11px;font-size:0.84rem;z-index:9999;transform:translateY(70px);opacity:0;transition:all 0.4s;border-left:4px solid var(--gold);box-shadow:var(--sh2);max-width:340px}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;text-align:center;gap:44px;padding-top:100px}
+  .hero-btns{justify-content:center}.hero-stats{justify-content:center}.hero-right{display:none}
+  .about-grid{grid-template-columns:1fr;gap:44px}.about-img-wrap{max-width:340px;margin:0 auto}
+  .ggrid{grid-template-columns:repeat(3,1fr)}
+  .pgrid2{grid-template-columns:repeat(2,1fr)}
+  .sketch-stage{grid-template-columns:1fr}
+  .igrid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .ggrid{grid-template-columns:repeat(2,1fr)}
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:28px}.pgrid::before{display:none}
+  .rgrid{grid-template-columns:1fr}
+  .cgrid2{grid-template-columns:1fr;gap:44px}
+  .igrid{grid-template-columns:repeat(3,1fr)}
+  .frow{grid-template-columns:1fr}.szrow{flex-direction:column}
+  section{padding:68px 5%}
+}
+@media(max-width:480px){
+  .ggrid{grid-template-columns:1fr 1fr}
+  .pgrid2{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .igrid{grid-template-columns:repeat(2,1fr)}
+  .ftin{flex-direction:column;text-align:center}
+  .about-badge{position:relative;bottom:auto;right:auto;display:inline-block;margin-top:14px}
+  .sketch-controls{flex-direction:column;align-items:stretch}
+  .celeb-box{padding:48px 24px 36px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Suhani <span>Sketch</span> Studio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#sketch-tool">Try Sketch</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#order" class="nav-cta">Order Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="toggleMob()">About</a>
+  <a href="#gallery" onclick="toggleMob()">Gallery</a>
+  <a href="#sketch-tool" onclick="toggleMob()">Try Sketch</a>
+  <a href="#pricing" onclick="toggleMob()">Pricing</a>
+  <a href="#order" onclick="toggleMob()">Order Sketch</a>
+  <a href="#contact" onclick="toggleMob()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-pill"><span class="dot"></span>Luxury Portrait Art</div>
+    <h1 class="hero-h1">Suhani<br><em>Sketch Studio</em></h1>
+    <p class="hero-sub">Handcrafted Portrait Sketches from Your Photos</p>
+    <p class="hero-quote">"Turn your memories into timeless art."</p>
+    <div class="hero-btns">
+      <a href="#gallery" class="btn btn-dark">🖼 View Gallery</a>
+      <a href="#order" class="btn btn-out">✏️ Order Sketch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><strong>5.0★</strong><span>Avg Rating</span></div>
+      <div class="hstat"><strong>100%</strong><span>Handcrafted</span></div>
+      <div class="hstat"><strong>❤️</strong><span>Made with Love</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-grid">
+      <div class="hcard">
+        <div class="hcard-img"><img src="couple-sketch.jpg" alt="Couple Sketch" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="hcard-info"><strong>Couple Sketch</strong><span>₹399 · A4</span></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-img"><img src="solo-sketch.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="hcard-info"><strong>Portrait</strong><span>₹299 · A4</span></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-img"><img src="dog-sketch.jpg" alt="Pet Sketch" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="hcard-info"><strong>Pet Sketch</strong><span>₹399 · A4</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div><span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img">
+        <img src="solo-sketch.jpg" alt="Suhani Portrait Art" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="about-frame"></div>
+      <div class="about-badge"><strong>5.0★</strong><span>Top Rated</span></div>
+    </div>
+    <div class="reveal" style="transition-delay:0.12s">
+      <div class="slabel">About the Artist</div>
+      <h2 class="stitle">Meet <em class="it gold">Suhani</em></h2>
+      <div class="about-content">
+        <p>Hi, I'm Suhani — a passionate portrait artist with a deep love for bringing faces to life on paper. What started as a personal hobby gradually turned into a calling when people began noticing the emotion and detail in my portraits.</p>
+        <p>I specialize in realistic hand-drawn pencil sketches — portraits, couples, families, and pets. Every piece is drawn entirely by hand, stroke by stroke, with care and love poured into every detail.</p>
+        <p>My goal is simple: to turn your most precious photo into a timeless piece of art you'll treasure forever — whether it's a wedding memory, a late grandparent, or your beloved pet.</p>
+      </div>
+      <div class="signature">~ Suhani</div>
+      <div class="about-stats">
+        <div class="astat"><strong>5.0★</strong><span>Avg Rating</span></div>
+        <div class="astat"><strong>100%</strong><span>Hand-drawn</span></div>
+        <div class="astat"><strong>❤️</strong><span>With Love</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="slabel reveal">Our Portfolio</div>
+  <h2 class="stitle reveal">Sketch <em class="it gold">Gallery</em></h2>
+  <p class="sdesc reveal">Each piece is a labour of love — crafted with precision, passion, and artistic depth.</p>
+  <div class="gtabs reveal">
+    <button class="gtab on" onclick="filterG('all',this)">All Work</button>
+    <button class="gtab" onclick="filterG('single',this)">Single</button>
+    <button class="gtab" onclick="filterG('couple',this)">Couple</button>
+    <button class="gtab" onclick="filterG('family',this)">Family</button>
+    <button class="gtab" onclick="filterG('pet',this)">Pet</button>
+    <button class="gtab gtab-celeb" onclick="openCeleb()">✦ Celebrity</button>
+  </div>
+  <div class="ggrid" id="ggrid"></div>
+</section>
+
+<!-- CELEBRITY MODAL -->
+<div id="celebModal" onclick="closeCelebOutside(event)">
+  <div class="celeb-box">
+    <div class="celeb-glow"></div>
+    <button class="celeb-x" onclick="closeCeleb()">✕</button>
+    <div class="celeb-stars">✦ ✦ ✦</div>
+    <span class="celeb-icon">🌟</span>
+    <div class="celeb-msg">Real Celebrity<em>is Always You</em></div>
+    <div class="celeb-tagline">"Every face has a story — yours is the most beautiful of all."</div>
+    <div class="celeb-quote">
+      <p>You don't need fame to deserve a portrait. Your memories, your love, your life — that's what makes you legendary. Let us sketch the celebrity within you, and turn your most cherished moment into timeless art.</p>
+    </div>
+    <a href="#order" class="btn btn-gold" onclick="closeCeleb()" style="width:100%;justify-content:center;font-size:0.86rem;padding:14px 20px">✏️ Order Your Celebrity Portrait</a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb" onclick="closeLBOut(event)">
+  <div class="lb-box">
+    <button class="lb-x" onclick="closeLB()">✕</button>
+    <div class="lb-img"><img id="lbImg" src="" alt="Sketch" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="lb-body">
+      <h3 id="lbTitle">Sketch</h3>
+      <p>Handcrafted with graphite pencil on 200gsm archival paper. Every stroke placed with care to capture emotion, likeness, and depth.</p>
+      <a href="#order" class="btn btn-gold" onclick="closeLB()">Order Similar →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="slabel reveal">How It Works</div>
+  <h2 class="stitle reveal">The <em class="it gold">Creative Process</em></h2>
+  <p class="sdesc reveal">From your photo to timeless handcrafted artwork in 4 simple steps.</p>
+  <div class="pgrid">
+    <div class="pstep reveal">
+      <div class="picon">📤<span class="pnum">1</span></div>
+      <h3>Upload Your Photo</h3>
+      <p>Share a clear, high-quality photo. Better photo = more detailed and accurate sketch.</p>
+    </div>
+    <div class="pstep reveal" style="transition-delay:0.1s">
+      <div class="picon">✏️<span class="pnum">2</span></div>
+      <h3>Artist Creates Sketch</h3>
+      <p>Suhani studies your photo and crafts the portrait by hand, layer by layer with full attention.</p>
+    </div>
+    <div class="pstep reveal" style="transition-delay:0.2s">
+      <div class="picon">👁️<span class="pnum">3</span></div>
+      <h3>Preview &amp; Approve</h3>
+      <p>We send a digital preview. Request free revisions before the final artwork is dispatched.</p>
+    </div>
+    <div class="pstep reveal" style="transition-delay:0.3s">
+      <div class="picon">🎁<span class="pnum">4</span></div>
+      <h3>Delivered to You</h3>
+      <p>Receive your beautiful, hand-crafted artwork — a memory that lasts forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO TO SKETCH TOOL -->
+<section id="sketch-tool">
+  <div class="slabel reveal">Live Demo</div>
+  <h2 class="stitle reveal">Photo to <em class="it gold">Sketch</em></h2>
+  <p class="sdesc reveal">See the magic happen! Upload any photo — or use the sample — and watch it transform into a beautiful pencil sketch instantly.</p>
+  <div class="sketch-wrap reveal">
+    <div class="sketch-stage">
+      <div class="sketch-panel">
+        <div class="sketch-panel-hd">
+          <span class="phd-title">Original Photo</span>
+          <span class="badge-before">Before</span>
+        </div>
+        <div class="sketch-canvas-wrap">
+          <canvas id="canvasOrig" width="400" height="300"></canvas>
+        </div>
+      </div>
+      <div class="sketch-panel">
+        <div class="sketch-panel-hd">
+          <span class="phd-title">Pencil Sketch</span>
+          <span class="badge-after">After ✦</span>
+        </div>
+        <div class="sketch-canvas-wrap">
+          <canvas id="canvasSketch" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="sketch-controls">
+      <label class="sketch-upload-btn">
+        📁 Upload Your Photo
+        <input type="file" id="sketchFile" accept="image/*" style="display:none" onchange="loadUserPhoto(event)">
+      </label>
+      <button class="sketch-convert-btn" onclick="convertToSketch()">✏️ Apply Sketch Effect</button>
+      <button class="sketch-download-btn" id="dlBtn" onclick="downloadSketch()">⬇ Download Sketch</button>
+      <span class="sketch-tip">✦ Try with your own portrait photo!</span>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <div class="slabel reveal">Commission Your Art</div>
+  <h2 class="stitle reveal">Order Your <em class="it gold">Custom Sketch</em></h2>
+  <p class="sdesc reveal">Fill in the details below and let's create something beautiful together.</p>
+  <div class="owrap" id="orderWrap">
+    <div class="prog-wrap">
+      <div class="prog-track"></div>
+      <div class="prog-fill" id="pFill" style="width:20%"></div>
+      <div class="pdot-wrap act" id="pd1"><div class="pdot">1</div><div class="pdot-lbl">Photo</div></div>
+      <div class="pdot-wrap" id="pd2"><div class="pdot">2</div><div class="pdot-lbl">Type</div></div>
+      <div class="pdot-wrap" id="pd3"><div class="pdot">3</div><div class="pdot-lbl">Size</div></div>
+      <div class="pdot-wrap" id="pd4"><div class="pdot">4</div><div class="pdot-lbl">Notes</div></div>
+      <div class="pdot-wrap" id="pd5"><div class="pdot">5</div><div class="pdot-lbl">Details</div></div>
+    </div>
+    <div class="fstep act" id="fs1">
+      <div class="fcard">
+        <h3>Upload Your Photo</h3>
+        <p>Share a clear, high-resolution photo for best results.</p>
+        <div class="ubox" onclick="document.getElementById('photoFile').click()">
+          <div class="uicon">🖼️</div>
+          <h4 id="ulbl">Click to upload or drag &amp; drop</h4>
+          <p>JPG, PNG or HEIC · Max 10MB</p>
+          <input type="file" id="photoFile" accept="image/*" style="display:none" onchange="handleFile(event)">
+        </div>
+      </div>
+      <div class="fnav"><span></span><button class="btn btn-dark" onclick="toStep(2)">Continue →</button></div>
+    </div>
+    <div class="fstep" id="fs2">
+      <div class="fcard">
+        <h3>Select Sketch Type</h3>
+        <p>Choose the type of portrait you'd like.</p>
+        <div class="tgrid">
+          <div class="stype" onclick="pickType(this,'Single Portrait',299)"><div class="ticon">👤</div><h4>Single / Portrait</h4><div class="tsub">Single person</div><div class="tprice">₹299 / ₹350</div></div>
+          <div class="stype" onclick="pickType(this,'Couple',399)"><div class="ticon">👫</div><h4>Couple</h4><div class="tsub">Two people</div><div class="tprice">₹399 / ₹499</div></div>
+          <div class="stype" onclick="pickType(this,'Family',499)"><div class="ticon">👨‍👩‍👧‍👦</div><h4>Family</h4><div class="tsub">3 or more people</div><div class="tprice">₹499 (A4 only)</div></div>
+          <div class="stype" onclick="pickType(this,'Pet',399)"><div class="ticon">🐶</div><h4>Pet</h4><div class="tsub">Pets &amp; animals</div><div class="tprice">₹399 / ₹499</div></div>
+        </div>
+      </div>
+      <div class="fnav"><button class="btn btn-out" onclick="toStep(1)">← Back</button><button class="btn btn-dark" onclick="toStep(3)">Continue →</button></div>
+    </div>
+    <div class="fstep" id="fs3">
+      <div class="fcard">
+        <h3>Choose Size</h3>
+        <p>Select the size of your finished sketch.</p>
+        <div class="szrow">
+          <div class="ssize" onclick="pickSize(this,'A4',0)"><div class="szico">📄</div><h4>A4</h4><span>21 × 29.7 cm</span><div class="szp">Base price</div></div>
+          <div class="ssize" onclick="pickSize(this,'A3','a3')"><div class="szico">🗒️</div><h4>A3</h4><span>29.7 × 42 cm</span><div class="szp">Portrait +₹51 · Others +₹100</div></div>
+          <div class="ssize" onclick="pickSize(this,'Custom',250)"><div class="szico">✏️</div><h4>Custom</h4><span>Any dimensions</span><div class="szp">+₹250</div></div>
+        </div>
+      </div>
+      <div class="pbar"><div><div class="pbl">Estimated Price</div><div class="pbd" id="pdesc">Single Portrait · A4</div></div><div class="pba" id="pamt">₹299</div></div>
+      <div class="fnav"><button class="btn btn-out" onclick="toStep(2)">← Back</button><button class="btn btn-dark" onclick="toStep(4)">Continue →</button></div>
+    </div>
+    <div class="fstep" id="fs4">
+      <div class="fcard">
+        <h3>Special Instructions</h3>
+        <p>Any notes for the artist? Style, background, emotions to capture?</p>
+        <div class="fgroup"><label>Message to the Artist</label><textarea id="notes" placeholder="E.g. Please capture her smile, minimal background, soft shading..."></textarea></div>
+        <div class="fgroup"><label>Reference Style (Optional)</label><input type="text" id="refStyle" placeholder="E.g. Realistic, Fine-line, Charcoal..."></div>
+      </div>
+      <div class="fnav"><button class="btn btn-out" onclick="toStep(3)">← Back</button><button class="btn btn-dark" onclick="toStep(5)">Continue →</button></div>
+    </div>
+    <div class="fstep" id="fs5">
+      <div class="fcard">
+        <h3>Your Details</h3>
+        <p>Where should we send your beautiful sketch?</p>
+        <div class="frow">
+          <div class="fgroup"><label>Full Name *</label><input type="text" id="cName" placeholder="Your full name"></div>
+          <div class="fgroup"><label>Email *</label><input type="email" id="cEmail" placeholder="you@email.com"></div>
+        </div>
+        <div class="frow">
+          <div class="fgroup"><label>Phone *</label><input type="tel" id="cPhone" placeholder="+91 XXXXX XXXXX"></div>
+          <div class="fgroup"><label>City</label><input type="text" id="cCity" placeholder="Your city"></div>
+        </div>
+        <div class="fgroup"><label>Delivery Address (for physical print)</label><textarea id="cAddr" placeholder="Full address for physical delivery (optional for digital)" style="min-height:76px"></textarea></div>
+      </div>
+      <div class="pbar"><div><div class="pbl">Total Order Value</div><div class="pbd" id="fdesc">Single Portrait · A4</div></div><div class="pba" id="famt">₹299</div></div>
+      <div class="fnav"><button class="btn btn-out" onclick="toStep(4)">← Back</button><button class="btn btn-gold" onclick="submitOrder()">✦ Submit Order</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="slabel reveal">Transparent Pricing</div>
+  <h2 class="stitle reveal">Sketch <em class="it gold">Packages</em></h2>
+  <p class="sdesc reveal">Affordable luxury — fine art made accessible for everyone.</p>
+  <div class="pgrid2">
+    <div class="pc reveal">
+      <div class="pc-ico">👤</div><h3>Single Portrait</h3><p class="pc-sub">Single person portrait</p>
+      <div class="pc-prices">
+        <div class="pc-prow"><span class="pc-stag">A4</span><div class="pc-amt"><span>₹</span>299</div></div>
+        <div class="pc-prow"><span class="pc-stag">A3</span><div class="pc-amt"><span>₹</span>350</div></div>
+      </div>
+      <ul class="pc-feats"><li>Single person portrait</li><li>Graphite pencil art</li><li>1 free revision</li><li>Digital delivery</li></ul>
+      <a href="#order" class="btn btn-out" style="width:100%;justify-content:center">Order Now</a>
+    </div>
+    <div class="pc feat reveal" style="transition-delay:0.1s">
+      <div class="fbadge">Popular</div>
+      <div class="pc-ico">👫</div><h3>Couple Sketch</h3><p class="pc-sub">Two people together</p>
+      <div class="pc-prices">
+        <div class="pc-prow"><span class="pc-stag">A4</span><div class="pc-amt"><span>₹</span>399</div></div>
+        <div class="pc-prow"><span class="pc-stag">A3</span><div class="pc-amt"><span>₹</span>499</div></div>
+      </div>
+      <ul class="pc-feats"><li>Two people together</li><li>Detailed shading</li><li>2 free revisions</li><li>Digital delivery</li></ul>
+      <a href="#order" class="btn btn-gold" style="width:100%;justify-content:center">Order Now</a>
+    </div>
+    <div class="pc reveal" style="transition-delay:0.2s">
+      <div class="pc-ico">👨‍👩‍👧‍👦</div><h3>Family Sketch</h3><p class="pc-sub">3–6 family members</p>
+      <div class="pc-prices">
+        <div class="pc-prow"><span class="pc-stag">A4</span><div class="pc-amt"><span>₹</span>499</div></div>
+        <div class="pc-prow"><span class="pc-stag" style="color:var(--light)">A3</span><div style="font-size:0.8rem;color:var(--light);margin-top:4px">Not available</div></div>
+      </div>
+      <ul class="pc-feats"><li>3–6 family members</li><li>A4 archival paper</li><li>3 free revisions</li><li>Digital delivery</li></ul>
+      <a href="#order" class="btn btn-out" style="width:100%;justify-content:center">Order Now</a>
+    </div>
+    <div class="pc reveal" style="transition-delay:0.3s">
+      <div class="pc-ico">🐶</div><h3>Pet Sketch</h3><p class="pc-sub">Pets &amp; animals</p>
+      <div class="pc-prices">
+        <div class="pc-prow"><span class="pc-stag">A4</span><div class="pc-amt"><span>₹</span>399</div></div>
+        <div class="pc-prow"><span class="pc-stag">A3</span><div class="pc-amt"><span>₹</span>499</div></div>
+      </div>
+      <ul class="pc-feats"><li>Any pet or animal</li><li>Fur &amp; texture detail</li><li>2 free revisions</li><li>Digital delivery</li></ul>
+      <a href="#order" class="btn btn-out" style="width:100%;justify-content:center">Order Now</a>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--mid);font-size:0.81rem;margin-top:24px">✦ Free digital file with every order · Delivered via WhatsApp</p>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="slabel reveal">Testimonials</div>
+  <h2 class="stitle reveal">What Customers <em class="it gold">Say</em></h2>
+  <p class="sdesc reveal">Real stories from real people who turned their memories into timeless art.</p>
+  <div class="rgrid">
+    <div class="rcard reveal"><div class="rquote">"</div><div class="rstars">★★★★★</div><p class="rtext">The sketch looked exactly like the photo. Absolutely beautiful! Suhani captured every detail, even the tiny scar on my grandfather's forehead. Brought tears to my eyes.</p><div class="rauthor"><div class="rav">P</div><div><div class="rname">Priya Sharma</div><div class="rloc">Mumbai, Maharashtra</div></div></div></div>
+    <div class="rcard reveal" style="transition-delay:0.1s"><div class="rquote">"</div><div class="rstars">★★★★★</div><p class="rtext">Ordered a couple portrait for our anniversary. The level of detail is breathtaking — it's now framed in our living room and everyone asks about it!</p><div class="rauthor"><div class="rav">R</div><div><div class="rname">Rohit &amp; Meera</div><div class="rloc">Pune, Maharashtra</div></div></div></div>
+    <div class="rcard reveal" style="transition-delay:0.2s"><div class="rquote">"</div><div class="rstars">★★★★★</div><p class="rtext">Got my dog sketched as a birthday gift — everyone absolutely LOVED it! The fur detail and the expression were spot-on. Will definitely order again.</p><div class="rauthor"><div class="rav">A</div><div><div class="rname">Anjali Nair</div><div class="rloc">Bengaluru, Karnataka</div></div></div></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="insta">
+  <div class="slabel" style="justify-content:center">Follow Our Journey</div>
+  <h2 class="stitle" style="text-align:center">Find Us on <em class="it gold">Instagram</em></h2>
+  <p style="text-align:center;color:var(--mid);max-width:480px;margin:0 auto;font-size:0.95rem;line-height:1.7">Follow for daily sketches, behind-the-scenes moments, and inspiration from the studio.</p>
+  <div class="igrid">
+    <div class="igitem"><img src="couple-sketch.jpg" alt="Couple sketch"><div class="igov">❤️</div></div>
+    <div class="igitem"><img src="solo-sketch.jpg" alt="Solo sketch"><div class="igov">❤️</div></div>
+    <div class="igitem"><img src="family-sketch.jpg" alt="Family sketch"><div class="igov">❤️</div></div>
+    <div class="igitem"><img src="dog-sketch.jpg" alt="Pet sketch"><div class="igov">❤️</div></div>
+    <div class="igitem"><img src="couple-sketch.jpg" alt="Couple sketch"><div class="igov">❤️</div></div>
+    <div class="igitem"><img src="solo-sketch.jpg" alt="Solo sketch"><div class="igov">❤️</div></div>
+  </div>
+  <a href="https://www.instagram.com/_suhani_._15?igsh=bHZ1b3Nxcng4bGZl" target="_blank" rel="noopener" class="insta-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    @_suhani_._15 · Follow on Instagram
+  </a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="cgrid2">
+    <div class="ci">
+      <div class="slabel">Get in Touch</div>
+      <h2 class="stitle">Let's Create <em class="it gold">Together</em></h2>
+      <p>Have a question or a special request? Reach out — we'd love to bring your vision to life on paper.</p>
+      <div class="cdet">
+        <div class="cdet-ico">📧</div>
+        <div><p>Email</p><strong>soulofart010@gmail.com</strong></div>
+      </div>
+      <div class="cdet">
+        <div class="cdet-ico">📸</div>
+        <div><p>Instagram</p><strong>@_suhani_._15</strong></div>
+      </div>
+      <div class="cdet">
+        <div class="cdet-ico">📍</div>
+        <div><p>Location</p><strong>India · Worldwide Delivery</strong></div>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/_suhani_._15?igsh=bHZ1b3Nxcng4bGZl" target="_blank" class="soc" title="Instagram">📸</a>
+        <a href="mailto:soulofart010@gmail.com" class="soc" title="Email">📧</a>
+      </div>
+    </div>
+    <div class="cf">
+      <div class="fgroup"><label>Your Name</label><input type="text" id="msgName" placeholder="Your name"></div>
+      <div class="fgroup"><label>Email</label><input type="email" id="msgEmail" placeholder="you@email.com"></div>
+      <div class="fgroup"><label>Message</label><textarea id="msgBody" placeholder="Tell us about your sketch idea..." style="min-height:130px"></textarea></div>
+      <button class="btn btn-gold" onclick="sendMessage()" style="width:100%;justify-content:center">Send Message ✦</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftin">
+    <div class="flogo">Suhani Sketch Studio</div>
+    <div class="fcopy">© 2025 Suhani Sketch Studio · All rights reserved · Made with ❤️</div>
+    <div class="flinks">
+      <a href="#gallery">Gallery</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========== GALLERY DATA =========== */
+const galleryItems = [
+  {cat:'single', img:'/solo-sketch.jpg',   name:'Portrait Study',    sub:'Single · Graphite Pencil'},
+  {cat:'couple', img:'/couple-sketch.jpg', name:'Beach Romance',     sub:'Couple · Graphite Pencil'},
+  {cat:'family', img:'/family-sketch.jpg', name:'Family Gathering',  sub:'Family · Graphite Pencil'},
+  {cat:'pet',    img:'/dog-sketch.jpg',    name:'Golden Retriever',  sub:'Pet · Graphite Pencil'},
+  {cat:'single', img:'/solo-sketch.jpg',   name:'Charcoal Portrait', sub:'Single · Charcoal'},
+  {cat:'couple', img:'/couple-sketch.jpg', name:'Sunset Walk',       sub:'Couple · Pencil'},
+  {cat:'family', img:'/family-sketch.jpg', name:'Together Always',   sub:'Family · Pencil'},
+  {cat:'pet',    img:'/dog-sketch.jpg',    name:'Loyal Friend',      sub:'Pet · Charcoal'},
+];
+
+/* =========== NAV =========== */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',window.scrollY>50);
+});
+function toggleMob(){document.getElementById('mobMenu').classList.toggle('open');}
+
+/* =========== SCROLL REVEAL =========== */
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1}).observe || document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+  },{threshold:0.1}).observe(el);
+});
+(new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'})).observe
+  ? document.querySelectorAll('.reveal').forEach(el=>{
+      (new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+      },{threshold:0.08,rootMargin:'0px 0px -30px 0px'})).observe(el);
+    })
+  : document.querySelectorAll('.reveal').forEach(el=>el.classList.add('vis'));
+
+/* =========== GALLERY =========== */
+function renderGallery(filter){
+  const grid=document.getElementById('ggrid');
+  const items=filter==='all'?galleryItems:galleryItems.filter(g=>g.cat===filter);
+  grid.innerHTML=items.map(g=>`
+    <div class="gitem" onclick="openLB('${g.img}','${g.name}')">
+      <div class="gimg"><img src="${g.img}" alt="${g.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="ginfo"><div class="gcat">${g.cat}</div><div class="gname">${g.name}</div></div>
+      <div class="gover"><div class="gover-txt"><small>${g.sub}</small><strong>${g.name}</strong></div></div>
+    </div>`).join('');
+}
+function filterG(cat,btn){
+  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderGallery(cat);
+}
+renderGallery('all');
+
+/* =========== CELEBRITY MODAL =========== */
+function openCeleb(){
+  document.getElementById('celebModal').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeCeleb(){
+  document.getElementById('celebModal').classList.remove('show');
+  document.body.style.overflow='';
+}
+function closeCelebOutside(e){if(e.target===document.getElementById('celebModal'))closeCeleb();}
+
+/* =========== LIGHTBOX =========== */
+function openLB(img,title){
+  document.getElementById('lbImg').src=img;
+  document.getElementById('lbTitle').textContent=title;
+  document.getElementById('lb').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){
+  document.getElementById('lb').classList.remove('show');
+  document.body.style.overflow='';
+}
+function closeLBOut(e){if(e.target===document.getElementById('lb'))closeLB();}
+
+/* =========== PHOTO TO SKETCH =========== */
+const cOrig=document.getElementById('canvasOrig');
+const cSketch=document.getElementById('canvasSketch');
+const ctxO=cOrig.getContext('2d');
+const ctxS=cSketch.getContext('2d');
+let currentImg=null;
+
+function drawPlaceholder(ctx,w,h,line1,line2){
+  ctx.fillStyle='#f0ece6';ctx.fillRect(0,0,w,h);
+  for(let y=0;y<h;y+=20)for(let x=0;x<w;x+=20){
+    ctx.fillStyle=((x+y)/20%2===0)?'#f0ece6':'#e8e2dc';ctx.fillRect(x,y,20,20);
+  }
+  ctx.fillStyle='rgba(201,168,76,0.08)';ctx.fillRect(0,0,w,h);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='13px Inter,sans-serif';ctx.fillStyle='#bbb';ctx.fillText(line1,w/2,h/2-10);
+  ctx.font='11px Inter,sans-serif';ctx.fillStyle='#C9A84C';ctx.fillText(line2,w/2,h/2+14);
+}
+drawPlaceholder(ctxO,400,300,'Upload a photo to get started','📁 Click "Upload Your Photo" below');
+drawPlaceholder(ctxS,400,300,'Sketch will appear here','✏️ Click "Apply Sketch Effect"');
+
+/* Load demo image on start */
+(function(){
+  const img=new Image();img.crossOrigin='anonymous';
+  img.src='https://picsum.photos/seed/beauty22/400/300';
+  img.onload=function(){
+    currentImg=img;ctxO.clearRect(0,0,400,300);ctxO.drawImage(img,0,0,400,300);
+    applySketch();
+  };
+})();
+
+function loadUserPhoto(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=function(ev){
+    const img=new Image();
+    img.onload=function(){
+      currentImg=img;ctxO.clearRect(0,0,400,300);ctxO.drawImage(img,0,0,400,300);
+      applySketch();showToast('Photo loaded & sketch applied!');
+    };img.src=ev.target.result;
+  };r.readAsDataURL(f);
+}
+
+function convertToSketch(){if(!currentImg){showToast('Upload a photo first!');return;}applySketch();}
+
+function applySketch(){
+  const W=400,H=300;
+  const off1=document.createElement('canvas');off1.width=W;off1.height=H;
+  const ctx1=off1.getContext('2d');ctx1.drawImage(currentImg,0,0,W,H);
+  const d=ctx1.getImageData(0,0,W,H).data;
+  const gray=new Uint8ClampedArray(d.length);
+  for(let i=0;i<d.length;i+=4){const g=0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];gray[i]=gray[i+1]=gray[i+2]=g;gray[i+3]=255;}
+  const inv=new Uint8ClampedArray(gray.length);
+  for(let i=0;i<gray.length;i+=4){inv[i]=255-gray[i];inv[i+1]=255-gray[i+1];inv[i+2]=255-gray[i+2];inv[i+3]=255;}
+  const off2=document.createElement('canvas');off2.width=W;off2.height=H;
+  const ctx2=off2.getContext('2d');ctx2.putImageData(new ImageData(inv,W,H),0,0);
+  const off3=document.createElement('canvas');off3.width=W;off3.height=H;
+  const ctx3=off3.getContext('2d');ctx3.filter='blur(5px)';ctx3.drawImage(off2,0,0);ctx3.filter='none';
+  const blurD=ctx3.getImageData(0,0,W,H).data;
+  const res=new Uint8ClampedArray(gray.length);
+  for(let i=0;i<gray.length;i+=4){
+    for(let c=0;c<3;c++){
+      const b=gray[i+c],bl=blurD[i+c];
+      let v=bl===255?255:Math.min(255,(b*255)/(255-bl));
+      v=Math.min(255,v*1.1+8);
+      v=Math.min(255,Math.max(0,(v-128)*1.2+128));
+      res[i+c]=v;
+    }res[i+3]=255;
+  }
+  ctxS.clearRect(0,0,W,H);ctxS.putImageData(new ImageData(res,W,H),0,0);
+  const dlBtn=document.getElementById('dlBtn');dlBtn.style.display='inline-flex';
+}
+
+function downloadSketch(){
+  const a=document.createElement('a');a.download='suhani-sketch.png';
+  a.href=cSketch.toDataURL('image/png');a.click();showToast('Sketch downloaded!');
+}
+
+/* =========== ORDER FORM =========== */
+let selType='Single Portrait',selBase=299,selSize='A4',selExtra=0;
+
+function toStep(n){
+  document.querySelector('.fstep.act').classList.remove('act');
+  document.getElementById('fs'+n).classList.add('act');
+  document.getElementById('pFill').style.width=['0%','20%','40%','60%','80%','100%'][n];
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById('pd'+i);
+    el.classList.remove('act','done');
+    if(i<n)el.classList.add('done');else if(i===n)el.classList.add('act');
+  }
+  document.getElementById('order').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function handleFile(e){
+  if(e.target.files[0]){document.getElementById('ulbl').textContent='✓ '+e.target.files[0].name;showToast('Photo ready!');}
+}
+function pickType(el,type,price){
+  document.querySelectorAll('.stype').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');selType=type;selBase=price;updatePrice();
+}
+function pickSize(el,size,extra){
+  document.querySelectorAll('.ssize').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');selSize=size;
+  selExtra=extra==='a3'?(selType==='Single Portrait'?51:100):(typeof extra==='number'?extra:0);
+  updatePrice();
+}
+function updatePrice(){
+  const t=selBase+selExtra;
+  document.getElementById('pdesc').textContent=selType+' · '+selSize;
+  document.getElementById('pamt').textContent='₹'+t;
+  document.getElementById('fdesc').textContent=selType+' · '+selSize;
+  document.getElementById('famt').textContent='₹'+t;
+}
+
+async function submitOrder(){
+  const name=document.getElementById('cName').value.trim();
+  const email=document.getElementById('cEmail').value.trim();
+  const phone=document.getElementById('cPhone').value.trim();
+  const city=document.getElementById('cCity').value.trim();
+  const addr=document.getElementById('cAddr').value.trim();
+  const notes=document.getElementById('notes').value.trim();
+  const style=document.getElementById('refStyle').value.trim();
+  if(!name||!email||!phone){showToast('⚠️ Please fill Name, Email, and Phone.');return;}
+  const total=selBase+selExtra;
+  showToast('📨 Sending your order...');
+
+  const orderPayload={
+    name, email, phone, city,
+    address: addr,
+    'Sketch Type': selType,
+    Size: selSize,
+    Price: '₹'+total,
+    Notes: notes,
+    Style: style
+  };
+
+  // 1. No backend on GitHub Pages — formsubmit.co handles delivery
+  const apiPromise = Promise.resolve({success:false});
+
+  // 2. Send to primary email via formsubmit.co (instant fallback)
+  const fs1Promise = fetch('https://formsubmit.co/ajax/soulofart010@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({
+      ...orderPayload,
+      _subject: '🎨 New Sketch Order from '+name+' — '+selType+' (₹'+total+')',
+      _cc: 'sarveshgajakosh23@gmail.com',
+      _template: 'table'
+    })
+  }).catch(()=>null);
+
+  // 3. Send directly to second email too (belt-and-suspenders)
+  const fs2Promise = fetch('https://formsubmit.co/ajax/sarveshgajakosh23@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({
+      ...orderPayload,
+      _subject: '🎨 New Sketch Order from '+name+' — '+selType+' (₹'+total+')',
+      _template: 'table'
+    })
+  }).catch(()=>null);
+
+  // Fire all three simultaneously
+  await Promise.allSettled([apiPromise, fs1Promise, fs2Promise]);
+
+  // Show success screen
+  document.getElementById('orderWrap').innerHTML=`
+    <div style="text-align:center;padding:64px 32px;animation:fadeUp 0.5s ease">
+      <div style="font-size:4rem;margin-bottom:20px">🎨</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:14px">Order Received!</h3>
+      <p style="color:var(--mid);max-width:460px;margin:0 auto 28px;line-height:1.8">
+        Thank you, <strong>${name}</strong>! Your order for a <strong>${selType}</strong> sketch (${selSize} · ₹${total}) has been placed.
+        We'll reach out to you soon at <strong>${email}</strong>.
+      </p>
+      <div style="font-family:'Dancing Script',cursive;font-size:1.7rem;color:var(--gold);margin-bottom:32px">"Your art is on its way ✨"</div>
+      <a href="#gallery" class="btn btn-gold">🖼 Explore More Sketches</a>
+    </div>`;
+  showToast('🎉 Order submitted! We\'ll be in touch soon.');
+}
+
+/* =========== CONTACT MSG =========== */
+async function sendMessage(){
+  const name=document.getElementById('msgName').value.trim();
+  const email=document.getElementById('msgEmail').value.trim();
+  const body=document.getElementById('msgBody').value.trim();
+  if(!name||!email||!body){showToast('Please fill all fields.');return;}
+  showToast('Sending...');
+  try{
+    await fetch('https://formsubmit.co/ajax/soulofart010@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,message:body,_subject:'Message from '+name,_cc:'sarveshgajakosh23@gmail.com'})
+    });
+  }catch(e){}
+  showToast('Message sent! We\'ll reply soon.');
+  document.getElementById('msgName').value='';
+  document.getElementById('msgEmail').value='';
+  document.getElementById('msgBody').value='';
+}
+
+/* =========== TOAST =========== */
+let tTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('show'),3600);
+}
+</script>
+</body>
+</html>
